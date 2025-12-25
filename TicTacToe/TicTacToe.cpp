@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstdio>
 
 using namespace std;
 
@@ -13,8 +12,8 @@ vector<vector<char>> board = { {'1','2','3'}, {'4','5','6'}, {'7','8','9'} };
 bool valid = false;
 
 int main(void){
-    char position;
-    char player, first;
+    char position, player, first;
+    int moves = 0;
     print_board();
     cout << "Who starts first(x/o)? ";
     cin >> first;
@@ -31,9 +30,14 @@ int main(void){
             update_board(position, player);
         }
         valid = false;
+        moves++;
 
         if (check_winner()) {
             cout << player << " Wins!";
+            break;
+        }
+        else if (!(check_winner()) && moves == 9) {
+            cout << "Draw!" << endl;
             break;
         }
 
